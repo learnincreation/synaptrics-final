@@ -14,10 +14,11 @@ class DirectHR(models.Model):
 		return self.user.username
 
 
-class LeaveHR(models.Model):
+
+class LeaveHRForm(models.Model):
 	is_approved = models.BooleanField(default = False)
 	is_rejected = models.BooleanField(default = False)
-	user = models.ForeignKey(User , on_delete = models.CASCADE , null = True)
+	user = models.ForeignKey(User , on_delete = models.CASCADE)
 	reason = models.TextField()
 	date = models.DateTimeField(default = timezone.now)
 
@@ -191,7 +192,7 @@ class DailyDrcallReport(models.Model):
 	is_approved = models.BooleanField(default = False)
 	is_rejected = models.BooleanField(default = False)
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	dr_name = models.ForeignKey(DrMasterList,on_delete=models.CASCADE , null= True)
+	dr_name = models.ForeignKey(DrMasterList ,on_delete=models.CASCADE , null= True)
 	dr_speciality = models.CharField(max_length = 100, choices = SPECIALITY , null= True)
 	Date_time = models.DateTimeField(auto_now = True , null= True)
 	current_prescribing_brand = models.CharField(max_length = 100,choices=CURRENT_PRESCRIBING_BRAND , null= True)

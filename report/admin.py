@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . import models
-from .models import DirectHR,  LeaveHR ,Monthlyplan,  DrMasterList , Expenses , ChemistMasterList , DailyActivites, DailyDrcallReport, DailyChemistcallReport, DailyDrMeetingReport,Others
+from .models import DirectHR,  LeaveHRForm ,Monthlyplan,  DrMasterList , Expenses , ChemistMasterList , DailyActivites, DailyDrcallReport, DailyChemistcallReport, DailyDrMeetingReport,Others
 # Daily_plan,chemistlist, Dr_visit_report, Expenses, DailyWorkingReport,HQ_List, chemist_call_report, day_summary, RCPA_details, doctor_visit_report
 from django.contrib.admin.options import ModelAdmin
 
@@ -49,11 +49,11 @@ class DailyDrMeetingReportAdmin(ModelAdmin):
 	list_filter = [ 'user','dr_name' , 'dr_speciality' ]
 admin.site.register(DailyDrMeetingReport, DailyDrMeetingReportAdmin)
 
-class LeaveHRAdmin(ModelAdmin):
+class LeaveHRFormAdmin(ModelAdmin):
 	list_display = ['user','reason']
 	search_field = ['user','reason']
 	list_filter = [ 'user','reason' ]
-admin.site.register( LeaveHR,  LeaveHRAdmin)
+admin.site.register( LeaveHRForm,  LeaveHRFormAdmin)
 
 class  DrMasterListAdmin(ModelAdmin):
 	list_display = ['user','dr_name', 'city', 'dr_speciality']

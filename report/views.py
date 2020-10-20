@@ -111,18 +111,16 @@ def DirectHR(request):
 	fields = [ 'user' , 'message' ] #describe the field need to create 
 	success_url = reverse_lazy('home')"""
 
-
-
 def LeaveHR(request):
 	if request.method == "POST":
-		    form = LeaveHRForm(request.POST)
+		    form = LeaveHRForm1(request.POST)
 		    if form.is_valid():
 		    	leavehr = form.save(commit=False)
 		    	leavehr.user = request.user
 		    	leavehr.save()
 		    	return redirect('report-home')
 	else:
-		form = LeaveHRForm()
+		form = LeaveHRForm1()
 		return render(request, 'report/LeaveHR.html', {'form': form})	
 
 
@@ -144,6 +142,7 @@ def LeaveList(request):
 	leave = LeaveHRForm.objects.all()
 	print("--------------")
 	return render(request,  '../templates/report/leavelist.html',{"leave":leave})	
+
 
 
 
@@ -213,14 +212,14 @@ def se_fieldactivity_pdf(request):
 
 
 
+	
+
 def DailyDrcallReportview(request):
 	if request.method == "POST":
 		form = DailyDrcallReportForm(request.POST)
 		if form.is_valid():
-			drlist = DrMasterList.objects.all().first()
 			dailycallreport = form.save(commit=False)
 			dailycallreport.user = request.user
-			dailycallreport.dr_name = drlist
 			dailycallreport.save()
 			return redirect('dailychemistmeetingreport')
 	else:
@@ -230,14 +229,14 @@ def DailyDrcallReportview(request):
 
 
 
+
+
 def DailyChemistcallReportview(request):
 	if request.method == "POST":
 		form = DailyChemistcallReportForm(request.POST)
 		if form.is_valid():
-			chrlist = ChemistMasterList.objects.all().first()
 			dailycallreport = form.save(commit=False)
 			dailycallreport.user = request.user
-			dailycallreport.chemist_name = chrlist
 			dailycallreport.save()
 			return redirect('expenses-report')
 	else:
@@ -245,11 +244,9 @@ def DailyChemistcallReportview(request):
 	return render(request,  '../templates/report/dailychemistcallreport.html', {'form': form})
 
 
-
-
-
 class ChemistcallReport_pdf(View):
 	def get(self, request):
+		
 		sales = DailyChemistcallReport.objects.filter(user=request.user)
 		today = timezone.now()
 		params = {
@@ -257,12 +254,13 @@ class ChemistcallReport_pdf(View):
             'sales': sales,
             'request': request
         }
-		return Render.render('../templates/report/feactivity_pdf.html', params)
+		return Render.render('../templates/report/ChemistcallReport_pdf.html', params)
+
 
 
 def ChemistcallReport_Profile(request):
 	se_fieldactivity = DailyChemistcallReport.objects.filter(user=request.user)
-	return render(request,  '../templates/report/feactivity_profile.html',{"se_fieldactivity":se_fieldactivity})	
+	return render(request,  '../templates/report/ChemistcallReport_Profile.html', {"se_fieldactivity":se_fieldactivity})	
 
 
 

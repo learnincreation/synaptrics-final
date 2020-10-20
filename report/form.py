@@ -33,10 +33,11 @@ class DirectHRForm(forms.ModelForm):
 		fields = [ "message"]
 
 
-class LeaveHRForm(forms.ModelForm):
-	class Meta :
-		model = LeaveHR  
-		fields = [ "reason"]
+
+class LeaveHRForm1(forms.ModelForm):
+    class Meta :
+        model = LeaveHRForm  
+        fields = [ "reason"]
 
 
 class DrMasterListForm(forms.ModelForm):
